@@ -12,16 +12,19 @@ export default function AdminPanel() {
   }, []);
 
   return (
-    <div>
-      <h1>Admin</h1>
-      {players.map((p) => (
-        <div key={p._id}>
-          {p.name}
-          <button onClick={() => socket.emit("startAuction", p._id)}>
-            Start
-          </button>
-        </div>
-      ))}
+    <div className="container">
+  <h1 style={{ color: "gold" }}>🎮 Admin Control</h1>
+
+  {players.map(p => (
+    <div className="card" key={p._id}>
+      <h3>{p.name}</h3>
+      <button onClick={() =>
+        socket.emit("startAuction", p._id)
+      }>
+        Start Auction
+      </button>
     </div>
+  ))}
+</div>
   );
 }
