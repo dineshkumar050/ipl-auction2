@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import JoinRoom from "./pages/JoinRoom";
 import AuctionRoom from "./pages/AuctionRoom";
+import AdminPanel from "./pages/AdminPanel";
 
 // Simple admin access via URL
   if (window.location.pathname === "/admin") {
