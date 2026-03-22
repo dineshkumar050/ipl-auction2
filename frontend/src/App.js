@@ -3,12 +3,14 @@ import JoinRoom from "./pages/JoinRoom";
 import AuctionRoom from "./pages/AuctionRoom";
 import AdminPanel from "./pages/AdminPanel";
 
-// Simple admin access via URL
+
+function App() {
+
+  // Simple admin access via URL
   if (window.location.pathname === "/admin") {
     return <AdminPanel />;
   }
 
-function App() {
   const [team, setTeam] = useState(null);
 
   return team ? <AuctionRoom team={team} /> : <JoinRoom setTeam={setTeam} />;
