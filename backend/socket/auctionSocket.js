@@ -44,6 +44,8 @@ module.exports = (io) => {
             }
 
             await team.save();
+
+            io.emit("team:update", team);
           }
 
           io.emit("auction:end", currentPlayer);
