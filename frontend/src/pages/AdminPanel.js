@@ -7,7 +7,7 @@ export default function AdminPanel() {
 
   useEffect(() => {
     axios
-      .get("https://YOUR-BACKEND-URL/players")
+      .get("https://ipl-auction2-1.onrender.com/players")
       .then((res) => setPlayers(res.data));
   }, []);
 
