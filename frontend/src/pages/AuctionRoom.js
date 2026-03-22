@@ -55,7 +55,7 @@ export default function AuctionRoom({ team }) {
         {teamData && (
           <div className="team-badge">
             <span>Wallet</span>
-            <strong>💰 {teamData.balance ?? "N/A"}</strong>
+            <strong>💰 {teamData.purse ?? "N/A"}</strong>
           </div>
         )}
       </div>
