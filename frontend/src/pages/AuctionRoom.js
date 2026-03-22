@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import socket from "../socket";
+import "./AuctionRoom.css";
 
 export default function AuctionRoom({ team }) {
   const [player, setPlayer] = useState(null);
@@ -7,12 +8,13 @@ export default function AuctionRoom({ team }) {
   const [bid, setBid] = useState("");
   const [teamData, setTeamData] = useState(null);
 
-  const bidSound = new Audio("/sounds/bid.mp3");
-  const soldSound = new Audio("/sounds/sold.mp3");
+  const bidSound = useMemo(() => new Audio("/sounds/bid.mp3"), []);
+  const soldSound = useMemo(() => new Audio("/sounds/sold.mp3"), []);
 
   useEffect(() => {
     socket.on("auction:start", setPlayer);
     socket.on("timer:update", setTimer);
+
     socket.on("bid:update", (p) => {
       bidSound.play();
       setPlayer(p);
@@ -25,34 +27,85 @@ export default function AuctionRoom({ team }) {
 
     socket.on("team:data", setTeamData);
 
-    return () => socket.off();
-  }, []);
+    return () => {
+      socket.off("auction:start", setPlayer);
+      socket.off("timer:update", setTimer);
+      socket.off("bid:update");
+      socket.off("auction:end");
+      socket.off("team:data", setTeamData);
+    };
+  }, [bidSound, soldSound]);
+
+  const placeBid = () => {
+    if (!bid || Number(bid) <= 0) return;
+    socket.emit("bid", { amount: Number(bid) });
+    setBid("");
+  };
 
   return (
-    <div className="container">
-      <h2 style={{ color: "gold" }}>🏆 Team: {team}</h2>
+    <div className="auction-page">
+      <div className="auction-bg" />
 
-      {player && (
-        <div className="card">
-          <img src={player.image} width="120" alt="" />
+      <div className="auction-header">
+        <div>
+          <p className="auction-label">Live Auction Room</p>
+          <h2>🏆 Team: {team}</h2>
+        </div>
 
-          <h1>{player.name}</h1>
-          <p>{player.role}</p>
+        {teamData && (
+          <div className="team-badge">
+            <span>Wallet</span>
+            <strong>💰 {teamData.balance ?? "N/A"}</strong>
+          </div>
+        )}
+      </div>
 
-          <p>💰 Current Bid: {player.currentBid}</p>
-          <p>🏏 Leading: {player.soldTo || "None"}</p>
+      {player ? (
+        <div className="auction-card">
+          <div className="player-image-wrap">
+            <img src={player.image} alt={player.name} className="player-image" />
+            <div className="player-role">{player.role}</div>
+          </div>
 
-          <div className="timer">⏳ {timer}s</div>
+          <div className="player-content">
+            <h1 className="player-name">{player.name}</h1>
 
-          <input
-            type="number"
-            placeholder="Enter bid"
-            onChange={(e) => setBid(e.target.value)}
-          />
+            <div className="stats-grid">
+              <div className="stat-box">
+                <span>Current Bid</span>
+                <strong>💰 {player.currentBid}</strong>
+              </div>
 
-          <button onClick={() => socket.emit("bid", { amount: Number(bid) })}>
-            🔥 Place Bid
-          </button>
+              <div className="stat-box">
+                <span>Leading Team</span>
+                <strong>🏏 {player.soldTo || "None"}</strong>
+              </div>
+
+              <div className={`stat-box timer-box ${timer <= 5 ? "danger" : ""}`}>
+                <span>Time Left</span>
+                <strong>⏳ {timer}s</strong>
+              </div>
+            </div>
+
+            <div className="bid-section">
+              <input
+                type="number"
+                value={bid}
+                placeholder="Enter your bid"
+                className="bid-input"
+                onChange={(e) => setBid(e.target.value)}
+              />
+
+              <button className="bid-button" onClick={placeBid}>
+                🔥 Place Bid
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="waiting-card">
+          <h3>No player in auction right now</h3>
+          <p>Waiting for the next round to begin...</p>
         </div>
       )}
     </div>
