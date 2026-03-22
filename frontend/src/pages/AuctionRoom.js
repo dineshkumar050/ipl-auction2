@@ -26,12 +26,18 @@ export default function AuctionRoom({ team }) {
     });
 
     socket.on("team:data", setTeamData);
+    socket.on("team:update", (updatedTeam) => {
+    if (updatedTeam.name === team) {
+      setTeamData(updatedTeam);
+    }
+  });
 
     return () => {
       socket.off("auction:start", setPlayer);
       socket.off("timer:update", setTimer);
       socket.off("bid:update");
       socket.off("auction:end");
+      socket.off("team:update");
       socket.off("team:data", setTeamData);
     };
   }, [bidSound, soldSound]);
