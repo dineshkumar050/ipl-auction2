@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import socket from "../socket";
-import "./AuctionRoom.css";
+import "../AuctionRoom.css";
 
 export default function AuctionRoom({ team }) {
   const [player, setPlayer] = useState(null);
