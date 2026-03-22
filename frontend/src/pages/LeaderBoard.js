@@ -6,7 +6,7 @@ export default function Leaderboard() {
 
   useEffect(() => {
     axios
-      .get("https://YOUR-BACKEND-URL/leaderboard")
+      .get("https://ipl-auction2-1.onrender.com/leaderboard")
       .then((res) => setTeams(res.data));
   }, []);
 
