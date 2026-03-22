@@ -11,9 +11,16 @@ export default function JoinRoom({ setTeam }) {
 
   return (
     <div className="center">
-      <h1>🏏 IPL Auction</h1>
-      <input onChange={(e) => setName(e.target.value)} />
-      <button onClick={join}>Join</button>
+      <h1 style={{ fontSize: "40px", color: "gold" }}>
+        🏏 IPL AUCTION LIVE
+      </h1>
+
+      <input
+        placeholder="Enter Team Name"
+        onChange={(e) => setName(e.target.value)}
+      />
+
+      <button onClick={join}>Enter Auction</button>
     </div>
   );
 }
