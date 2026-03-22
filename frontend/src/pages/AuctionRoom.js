@@ -28,26 +28,33 @@ export default function AuctionRoom({ team }) {
     return () => socket.off();
   }, []);
 
-  return (
-    <div className="container">
-      <h2>{team}</h2>
-      {teamData && <h3>💰 {teamData.purse}</h3>}
+  <div className="container">
+  <h2 style={{ color: "gold" }}>🏆 Team: {team}</h2>
 
-      {player && (
-        <div className="card">
-          <img src={player.image} width="120" alt="" />
-          <h1>{player.name}</h1>
-          <p>{player.role}</p>
-          <p>💰 {player.currentBid}</p>
-          <p>🏆 {player.soldTo}</p>
-          <h3>⏳ {timer}</h3>
+  {player && (
+    <div className="card">
+      <img src={player.image} width="120" alt="" />
 
-          <input onChange={(e) => setBid(e.target.value)} />
-          <button onClick={() => socket.emit("bid", { amount: Number(bid) })}>
-            Bid
-          </button>
-        </div>
-      )}
+      <h1>{player.name}</h1>
+      <p>{player.role}</p>
+
+      <p>💰 Current Bid: {player.currentBid}</p>
+      <p>🏏 Leading: {player.soldTo || "None"}</p>
+
+      <div className="timer">⏳ {timer}s</div>
+
+      <input
+        type="number"
+        placeholder="Enter bid"
+        onChange={(e) => setBid(e.target.value)}
+      />
+
+      <button onClick={() =>
+        socket.emit("bid", { amount: Number(bid) })
+      }>
+        🔥 Place Bid
+      </button>
     </div>
-  );
+  )}
+</div>
 }
