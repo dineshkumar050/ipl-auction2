@@ -59,6 +59,8 @@ module.exports = (io) => {
 
             await team.save();
 
+            team = await Team.findOne({ name: currentPlayer.soldTo }).populate("players");
+
             io.emit("team:update", team);
           }
 
