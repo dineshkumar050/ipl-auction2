@@ -12,7 +12,12 @@ module.exports = (io) => {
 
       let team = await Team.findOne({ name: teamName });
       if (!team) {
-        team = await Team.create({ name: teamName });
+        team = await Team.create({
+      name: teamName,
+      purse: 1000,
+      players: [],
+      overseasCount: 0
+    });
       }
 
       socket.emit("team:data", team);
