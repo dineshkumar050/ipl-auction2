@@ -15,6 +15,12 @@ export default function AdminPanel() {
     <div className="container">
   <h1 style={{ color: "gold" }}>🎮 Admin Control</h1>
 
+  <div style={{ marginBottom: "20px" }}>
+        <button onClick={() => socket.emit("skipAuction")}>
+          Skip Current Player
+        </button>
+      </div>
+
   {players.map(p => (
     <div className="card" key={p._id}>
       <h3>{p.name}</h3>
