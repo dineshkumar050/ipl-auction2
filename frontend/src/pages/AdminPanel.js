@@ -24,14 +24,17 @@ export default function AdminPanel() {
         {players.map((p) => (
           <div className="admin-card" key={p._id}>
             <div className="admin-card-top">
-              <div>
-                <h3>{p.name}</h3>
-                <p>{p.role}</p>
-                <p>Team: {p.IPLTeam}</p>
-                <p>Base Price: {p.basePrice}</p>
-              </div>
-              {p.image ? <img src={p.image} alt={p.name} className="admin-player-img" /> : null}
-            </div>
+  <div className="admin-player-info">
+    <h3>{p.name}</h3>
+    <p>{p.role}</p>
+    <p>Team: {p.IPLTeam}</p>
+    <p>Base Price: {p.basePrice}</p>
+  </div>
+
+  {p.image && (
+    <img src={p.image} alt={p.name} className="admin-player-img" />
+  )}
+</div>
 
             <button onClick={() => socket.emit("startAuction", p._id)}>
               Start Auction
