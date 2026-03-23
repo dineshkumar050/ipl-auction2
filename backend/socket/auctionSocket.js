@@ -69,7 +69,9 @@ module.exports = (io) => {
 
         await currentPlayer.save();
 
-        timer = 10;
+        if(timer <=20) {
+          timer = 20;
+        }
         io.emit("bid:update", currentPlayer);
       }
     });
