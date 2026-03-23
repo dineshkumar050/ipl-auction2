@@ -285,7 +285,7 @@ button:active {
 .admin-card-top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;   /* center vertically */
   gap: 12px;
   margin-bottom: 18px;
 }
@@ -302,11 +302,16 @@ button:active {
 }
 
 .admin-player-img {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 2px solid rgba(250, 204, 21, 0.6);
+}
+
+/* Optional: better text alignment */
+.admin-card-top div {
+  flex: 1;
 }
 
 .admin-card button {
