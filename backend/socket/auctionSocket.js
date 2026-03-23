@@ -20,6 +20,8 @@ module.exports = (io) => {
     });
       }
 
+      team = await Team.findOne({ name: teamName }).populate("players");
+      
       socket.emit("team:data", team);
     });
 
