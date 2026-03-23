@@ -63,6 +63,8 @@ module.exports = (io) => {
           }
 
           io.emit("auction:end", currentPlayer);
+          currentPlayer = null;
+          timer = 0;
         }
       }, 1000);
     });
