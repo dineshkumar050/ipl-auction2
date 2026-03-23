@@ -25,6 +25,12 @@ export default function AuctionRoom({ team }) {
       alert(`${p.name} sold to ${p.soldTo}`);
     });
 
+    socket.on("auction:skipped", (p) => {
+    alert(`${p.name} was skipped`);
+    setPlayer(null);
+    setTimer(0);
+    });
+    
     socket.on("team:data", setTeamData);
     socket.on("team:update", (updatedTeam) => {
     if (updatedTeam.name === team) {
@@ -38,6 +44,7 @@ export default function AuctionRoom({ team }) {
       socket.off("bid:update");
       socket.off("auction:end");
       socket.off("team:update");
+      socket.off("auction:skipped");
       socket.off("team:data", setTeamData);
     };
   }, [bidSound, soldSound]);
