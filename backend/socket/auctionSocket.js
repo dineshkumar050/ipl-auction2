@@ -18,6 +18,20 @@ module.exports = (io) => {
       socket.emit("team:data", team);
     });
 
+    socket.on("skipAuction", async () => {
+  if (!currentPlayer) return;
+
+  clearInterval(interval);
+
+  const skippedPlayer = currentPlayer;
+
+  currentPlayer = null;
+  timer = 0;
+
+  io.emit("auction:skipped", skippedPlayer);
+  io.emit("timer:update", 0);
+});
+
     socket.on("startAuction", async (playerId) => {
       currentPlayer = await Player.findById(playerId);
       currentPlayer.currentBid = currentPlayer.basePrice;
