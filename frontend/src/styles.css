@@ -88,3 +88,152 @@ button:hover {
   from { opacity: 0; transform: translateY(20px);}
   to { opacity: 1; transform: translateY(0);}
 }
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a, #9333ea);
+  color: white;
+  min-height: 100vh;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 28px;
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.join-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.join-page::before,
+.join-page::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.join-page::before {
+  width: 240px;
+  height: 240px;
+  background: #facc15;
+  top: 8%;
+  left: 8%;
+}
+
+.join-page::after {
+  width: 260px;
+  height: 260px;
+  background: #38bdf8;
+  bottom: 10%;
+  right: 10%;
+}
+
+.join-card {
+  position: relative;
+  z-index: 1;
+}
+
+.join-badge {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(250, 204, 21, 0.18);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  color: #facc15;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.join-title {
+  margin: 0 0 10px;
+  font-size: 38px;
+  line-height: 1.1;
+  color: gold;
+  text-shadow: 0 0 14px rgba(255, 215, 0, 0.35);
+}
+
+.join-subtitle {
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  margin: 0 0 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  outline: none;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  backdrop-filter: blur(8px);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+input:focus {
+  border-color: rgba(250, 204, 21, 0.7);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.15);
+}
+
+button {
+  width: 100%;
+  background: linear-gradient(45deg, gold, orange);
+  border: none;
+  padding: 14px 18px;
+  font-weight: 800;
+  font-size: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  color: #111827;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
