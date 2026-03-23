@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import socket from "../socket";
-
+import "../styles.css";
 export default function JoinRoom({ setTeam }) {
   const [name, setName] = useState("");
 
